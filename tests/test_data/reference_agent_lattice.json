@@ -1,0 +1,67 @@
+{
+  "nodes": [
+    {
+      "id": "coordinator",
+      "layer_type": "agent",
+      "attributes": {
+        "name": "coordinator",
+        "tier": "orchestration"
+      }
+    },
+    {
+      "id": "decision_engine",
+      "layer_type": "agent",
+      "attributes": {
+        "name": "decision_engine",
+        "tier": "logic"
+      }
+    },
+    {
+      "id": "execution_layer",
+      "layer_type": "agent",
+      "attributes": {
+        "name": "execution_layer",
+        "tier": "operations"
+      }
+    },
+    {
+      "id": "monitoring_agent",
+      "layer_type": "agent",
+      "attributes": {
+        "name": "monitoring_agent",
+        "tier": "observation"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "coordinator",
+      "target": "decision_engine",
+      "relation_type": "delegates_to",
+      "weight": 1.0
+    },
+    {
+      "source": "decision_engine",
+      "target": "execution_layer",
+      "relation_type": "directs",
+      "weight": 1.0
+    },
+    {
+      "source": "execution_layer",
+      "target": "monitoring_agent",
+      "relation_type": "reports_to",
+      "weight": 1.0
+    },
+    {
+      "source": "monitoring_agent",
+      "target": "coordinator",
+      "relation_type": "feeds_back",
+      "weight": 1.0
+    }
+  ],
+  "metadata": {
+    "template_id": "agent_lattice_v1",
+    "description": "Standard agent coordination pattern with feedback loop",
+    "tier_count": 4
+  }
+}
