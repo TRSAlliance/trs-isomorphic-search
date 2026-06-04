@@ -1,0 +1,72 @@
+{
+  "nodes": [
+    {
+      "id": "orchestrator",
+      "layer_type": "agent",
+      "attributes": {
+        "name": "main_orchestrator",
+        "tier": "orchestration",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "id": "planner",
+      "layer_type": "agent",
+      "attributes": {
+        "name": "plan_engine",
+        "tier": "logic",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "id": "executor",
+      "layer_type": "agent",
+      "attributes": {
+        "name": "task_executor",
+        "tier": "operations",
+        "version": "1.0.0"
+      }
+    },
+    {
+      "id": "observer",
+      "layer_type": "agent",
+      "attributes": {
+        "name": "system_monitor",
+        "tier": "observation",
+        "version": "1.0.0"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "orchestrator",
+      "target": "planner",
+      "relation_type": "delegates_to",
+      "weight": 1.0
+    },
+    {
+      "source": "planner",
+      "target": "executor",
+      "relation_type": "directs",
+      "weight": 1.0
+    },
+    {
+      "source": "executor",
+      "target": "observer",
+      "relation_type": "reports_to",
+      "weight": 1.0
+    },
+    {
+      "source": "observer",
+      "target": "orchestrator",
+      "relation_type": "feeds_back",
+      "weight": 1.0
+    }
+  ],
+  "metadata": {
+    "system_id": "workflow_sample_01",
+    "timestamp": "2026-06-04T10:00:00Z",
+    "version": "1.0.0",
+    "description": "Sample workflow following agent lattice pattern"
+  }
+}
